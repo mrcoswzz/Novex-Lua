@@ -811,13 +811,13 @@ do
         enviarBtn.MouseButton1Click:Connect(enviar)
         caixa.FocusLost:Connect(function(enter) if enter then enviar() end end)
         fechar.MouseButton1Click:Connect(function() Janela.Visible = false end)
-        msg("Olá! Sou o Assistente NOVEX com IA. Assim que o endpoint OpenRouter for configurado, poderei conversar e usar o catálogo real de comandos como contexto.", false)
+        msg("Olá! Sou o Assistente NOVEX com IA. Envie uma mensagem para testar a conexão com o servidor.", false)
 
         local Botao = create("TextButton", {
-            Position = UDim2.new(0, 10, 0.5, -20), Size = UDim2.fromOffset(42, 42),
+            Position = UDim2.new(0, 12, 0.72, 0), Size = UDim2.fromOffset(48, 48),
             BackgroundColor3 = C.blue2, BackgroundTransparency = 0.08, Text = "✦",
             TextSize = 22, Font = BOLD, TextColor3 = C.white, BorderSizePixel = 0,
-            ZIndex = 65, Visible = false,
+            ZIndex = 100, Visible = true,
         }, GUI)
         corner(Botao, 21)
         stroke(Botao, C.white, 0.55, 1.2)
@@ -825,8 +825,8 @@ do
 
         local function sincroniza()
             Info.Visible = infoLigada and Shell.Visible
-            Botao.Visible = Shell.Visible
-            if not Shell.Visible then Janela.Visible = false end
+            -- O atalho da IA permanece visível mesmo quando o menu principal está fechado.
+            Botao.Visible = true
         end
         Shell:GetPropertyChangedSignal("Visible"):Connect(sincroniza)
         sincroniza()
